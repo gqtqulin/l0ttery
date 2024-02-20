@@ -1,0 +1,15 @@
+
+
+.loginContainer {
+    @apply h-[100vh] w-[100%] flex justify-center align-middle items-center flex-col gap-y-5;
+}
+
+.loginTextContainer {
+    @apply text-6xl font-honk;
+}
+
+.loginButton {
+    @apply w-[250px] h-[60px] text-2xl;
+}
+
+

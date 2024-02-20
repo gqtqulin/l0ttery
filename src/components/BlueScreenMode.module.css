@@ -1,0 +1,9 @@
+
+.blueScreenContainer {
+    @apply min-w-[100%] min-h-[100vh] flex flex-col items-center justify-center bg-winBlue font-pixelify text-3xl
+                    text-white gap-y-3;
+}
+
+.button {
+    @apply fixed left-0 bottom-0 hover:underline py-2 px-4;
+}

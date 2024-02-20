@@ -1,0 +1,8 @@
+
+.depositFrameContainer {
+    @apply fixed h-[10vh] w-[30%] top-7;
+}
+
+.depositFrame {
+    @apply min-h-full min-w-full;
+}

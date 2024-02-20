@@ -1,0 +1,21 @@
+
+
+.page {
+  @apply h-[100vh] w-[100%] m-0 p-0 flex justify-center items-center font-pressstart2p bg-winGreen;
+}
+
+.blueScreenPage {
+  @apply h-[100vh] w-[100%] m-0 p-0 flex justify-center items-center font-pressstart2p bg-winBlue text-white;
+}
+
+.title {
+  @apply font-pressstart2p text-white flex items-center;
+}
+
+.titleBarContainer {
+  @apply absolute top-1;
+}
+
+.footerContainer {
+  @apply absolute bottom-1 text-white bg-winRed px-4;
+}
