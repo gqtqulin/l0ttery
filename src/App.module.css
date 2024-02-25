@@ -15,7 +15,3 @@
 .titleBarContainer {
   @apply absolute top-1;
 }
-
-.footerContainer {
-  @apply absolute bottom-1 text-white bg-winRed px-4;
-}

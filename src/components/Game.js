@@ -1,125 +1,179 @@
-import { Button, Frame, Input, List } from "@react95/core";
-import { FileFind, HelpBook, LoaderBat } from "@react95/icons";
+import { Button, Frame, Input, List, Range } from "@react95/core";
 import "@react95/icons/icons.css";
 import { useState, useEffect } from "react";
 import styles from "./Game.module.css";
 import "../index.css";
 import { revokePermissions, deposit } from "../ethereum/ethereum";
 import { generateRndNumber } from "../util/util";
-import DepositMenu from "./DepositMenu";
 
 const Game = ({
-  accountAddress,
-  setAccountAddress,
-  removeCookies,
-  setIsBlueScreenMode,
+    accountAddress,
+    setAccountAddress,
+    removeCookies,
+    setIsBlueScreenMode,
 }) => {
-  const [range, setRange] = useState(0);
-  const [numbers, setNumbers] = useState(`1 3 3 7`);
-  const [depositMenu, setVisiableDepositMenu] = useState(false);
+    const [range, setRange] = useState(500); // -- число от 0 до 1000 - отображает где пользователь поставил ползунок
+    const [displayRange, setDisplayRange] = useState(500);
+    const [pointer, setPointer] = useState(0); // -- выбор пользователя больше или меньше в диапазоне
+    const [amount, setAmount] = useState(0); // -- $$$ на сколько ставим
+    const [numbers, setNumbers] = useState(`1337`); // -- выпавшие цифры
+    const [balance, setBalance] = useState(0.0); // -- баланс пользователя на сайте
+    const [coefficient, setCoefficient] = useState(1.0);
 
-  const handleLogoutButton = () => {
-    // -- drop cookies & account (state) & revoke permissions (metamask)
-    setAccountAddress("");
-    removeCookies("accountAddress");
-    revokePermissions();
-  };
+    const updateCoefficient = () => {
+        let val;
 
-  const handleWithdrawButton = () => {
-    setIsBlueScreenMode(true);
-  };
+        if (pointer === 0) {
+            val = range;
+        } else if (pointer === 1) {
+            val = 1000 - range;
+        }
 
-  /**
-   * run game
-   */
-  const handleBetButton = () => {
-    const rnd = generateRndNumber(10000); // -- минимум 1 число
-    // const rnd = String(generateRndNumber(10));
-    // console.log(rnd);
+        val = parseFloat((10 - val / 100) / 2.5);
+        if (val < 1.1) val = 1.1;
+        val = val.toFixed(2);
 
-    let result = String(rnd);
-    let i = 4 - result.length;
-    while (i > 0) {
-      result = "0" + result;
-      i--;
+        setCoefficient(val);
+    };
+
+    const updateDisplayRange = () => {
+        let val;
+
+        if (pointer === 0) {
+            val = range;
+        } else if (pointer === 1) {
+            val = 1000 - range;
+        }
+
+        setDisplayRange(val);
     }
-    setNumbers(`${result[0]} ${result[1]} ${result[2]} ${result[3]}`);
 
-    const resultRange = rnd <= 5000 ? 0 : 1;
+    useEffect(() => {
+        updateCoefficient();
+        updateDisplayRange();
+    }, [range, pointer]);
 
-    // пополнить / убавить баланс на сайте и в блокчейне
-  };
+    const handleChangeRange = (e) => {
+        setRange(10 * parseInt(e.target.value));
+    };
 
-  return (
-    <div className={styles.gameContainer}>
-      {depositMenu ? <DepositMenu /> : <></>}
+    const handleLeftPointerButton = () => {
+        setPointer(0);
+    };
 
-      <div className={styles.gameFrameContainer}>
-        <Frame className={styles.gameFrame}>
-          <div className={styles.numbersContainer}>
-            <div className={styles.numbers}>{numbers}</div>
-          </div>
-          <div className={styles.inputContainer}>
-            <div className={styles.optionsContainer}>
-              <p
-                className={`${styles.range} ${
-                  range === 0 ? "text-black" : "text-gray-600"
-                }`}
-              >
-                0000 - 5000
-              </p>
-              <button
-                className={`${styles.option} ${
-                  range === 0 ? "text-red-900" : ""
-                }`}
-                onClick={() => setRange(0)}
-              >
-                &lt;
-              </button>
-              <button
-                className={`${styles.option} ${
-                  range === 1 ? "text-red-900" : ""
-                }`}
-                onClick={() => setRange(1)}
-              >
-                &gt;
-              </button>
-              <p
-                className={`${styles.range} ${
-                  range === 1 ? "text-black" : "text-gray-600"
-                }`}
-              >
-                5001 - 9999
-              </p>
+    const handleRightPointerButton = () => {
+        setPointer(1);
+    };
+
+    /**
+     * run game
+     */
+    const handleBetButton = () => {
+        const rnd = generateRndNumber(10000); // -- минимум 1 число
+        // const rnd = String(generateRndNumber(10));
+        // console.log(rnd);
+
+        let result = String(rnd);
+        let i = 4 - result.length;
+        while (i > 0) {
+            result = "0" + result;
+            i--;
+        }
+        setNumbers(`${result[0]}${result[1]}${result[2]}${result[3]}`);
+
+        const resultRange = rnd <= 5000 ? 0 : 1;
+
+        // пополнить / убавить баланс на сайте и в блокчейне
+    };
+
+    return (
+        <div className={styles.gameContainer}>
+            <div className={styles.gameFrameContainer}>
+                <Frame className={styles.gameFrame} bg="#286061">
+                    <div className={styles.userPanelButtonsContainer}>
+                        <div className={styles.inputAmountContainer}>
+                            <Input
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
+                                className={styles.input}
+                            ></Input>
+                        </div>
+                        <div className={styles.optionsContainer}>
+                            <p>
+                                {coefficient}x / {range}
+                            </p>
+                            <div className={styles.optionsButtonContainer}>
+                                <button
+                                    onClick={handleLeftPointerButton}
+                                    className={`${styles.option} ${
+                                        pointer === 0 ? "text-winRed" : ""
+                                    }`}
+                                >
+                                    &gt;
+                                </button>
+                                <Range
+                                    style={{
+                                        width: 100,
+                                    }}
+                                    className={styles.range}
+                                    onChange={handleChangeRange}
+                                />
+                                <button
+                                    onClick={handleRightPointerButton}
+                                    className={`${styles.option} ${
+                                        pointer === 1 ? "text-winRed" : ""
+                                    }`}
+                                >
+                                    &lt;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.numbersContainer}>
+                        <div className={styles.numbers}>{numbers}</div>
+                        <Button
+                            className={styles.rollButton}
+                            onClick={handleBetButton}
+                        >
+                            bet
+                        </Button>
+                    </div>
+
+                    <div className={styles.inputContainer}>
+                        <div className={styles.buttonsAmountContainer}>
+                            <Button
+                                className={styles.amountButton}
+                                onClick={() => setAmount(0)}
+                            >
+                                zero
+                            </Button>
+                            <Button
+                                className={styles.amountButton}
+                                onClick={() => setAmount(balance / 3)}
+                            >
+                                33%
+                            </Button>
+                        </div>
+                        <div className={styles.buttonsAmountContainer}>
+                            <Button
+                                className={styles.amountButton}
+                                onClick={() => setAmount(balance)}
+                            >
+                                all in
+                            </Button>
+                            <Button
+                                className={styles.amountButton}
+                                onClick={() => setAmount(balance / 2)}
+                            >
+                                50%
+                            </Button>
+                        </div>
+                    </div>
+                </Frame>
             </div>
-
-            <div className={styles.inputAmountContainer}>
-              <Input className={styles.input}></Input>
-            </div>
-
-            <Button className={styles.rollButton} onClick={handleBetButton}>
-              bet
-            </Button>
-          </div>
-        </Frame>
-      </div>
-
-      <div className={styles.userPanelFrameContainer}>
-        <Frame className={styles.userPanelFrame}>
-          <p className={styles.header}>{accountAddress}</p>
-          <div className={styles.userPanelButtonsContainer}>
-            <List>
-              <List.Item icon={<FileFind variant="32x32_4" />}>deposit</List.Item>
-              <List.Item onClick={handleWithdrawButton} icon={<HelpBook variant="32x32_4" />}>withdraw</List.Item>
-              <List.Item icon={<LoaderBat variant="32x32_4" />}>
-                logout
-              </List.Item>
-            </List>
-          </div>
-        </Frame>
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Game;

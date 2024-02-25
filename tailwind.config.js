@@ -7,7 +7,11 @@ module.exports = {
         pixelify: ['"Pixelify Sans"', 'serif'],
         honk: ['"Honk"', 'display'],
         silkscreen: ['"Silkscreen"', 'display'],
-        pressstart2p: ['"Press Start 2P"']
+        pressstart2p: ['"Press Start 2P"'],
+        jacquardaBastarda: ['"Jacquarda Bastarda 9"'],
+        micro5: ['"Micro 5"'],
+        rockSalt: ['"Rock Salt"'],
+        kranky: ['"Kranky"'],
       },
       colors: {
         winGreen: "#008081",

@@ -1,14 +1,4 @@
 
-/*
-
-текст
-
-*/
-
-.header {
-    @apply font-pressstart2p text-xl;
-}
-
 
 /*
 
@@ -16,7 +6,7 @@
 
 */
 .gameContainer {
-    @apply h-[100vh] w-[100%] flex justify-center align-middle items-center flex-col gap-y-10;
+    @apply h-[100vh] w-[100%] flex justify-center align-middle items-center flex-col gap-y-6;
 }
 
 /*
@@ -26,62 +16,72 @@
 */
 
 .gameFrame {
-    @apply min-w-full min-h-full flex flex-col justify-center items-center;
+    @apply min-w-full min-h-full flex flex-row justify-around items-center;
 }
 
 .gameFrameContainer {
-    @apply h-[55vh] w-[75%];
+    @apply h-[30vh] w-[75%];
 }
 
-/* inner */
+.header {
+    @apply font-pressstart2p text-xl;
+}
 
 .numbersContainer {
-    @apply w-[100%] text-8xl font-honk flex justify-center items-center flex-col mt-[15%];
+    @apply flex min-w-[200px] justify-center gap-y-5 items-center flex-col;
 }
 
+.numbers {
+    @apply text-8xl font-honk;
+}
+
+.amountButton {
+    @apply w-[100px] h-[50px];
+}
+
+/* right container */
 .inputContainer {
-    @apply w-[100%] flex flex-col justify-center items-center gap-y-3;
+    @apply flex flex-col justify-center items-center gap-y-2;
+}
+
+.buttonsAmountContainer {
+    @apply flex justify-center items-center;
+}
+
+/* left container */
+.userPanelButtonsContainer {
+    @apply flex flex-col gap-y-5;
 }
 
 .rollButton {
-    @apply text-2xl w-[150px] font-bold;
+    @apply text-xl w-[150px] hover:font-bold;
 }
 
 .input {
+    @apply w-[200px] text-center;
+}
+
+.range {
     @apply w-[200px];
 }
 
 .optionsContainer {
-    @apply flex flex-row items-center gap-x-6 pt-5;
+    @apply flex flex-col justify-center items-center; 
 }
 
-.inputAmountContainer {
-    
+.optionsButtonContainer {
+    @apply flex flex-row items-center gap-x-5;
 }
 
 .option {
-    @apply inline-flex text-2xl hover:text-[#8E0101];
+    @apply inline-flex text-2xl hover:text-winRed;
 }
-
-.range {
-
-}
-
-/*
-
-контейнер панели управления
-
-*/
 
 .userPanelFrame {
-    @apply min-w-full min-h-full flex flex-col justify-around items-center;
+    @apply min-w-full min-h-full flex flex-col justify-center items-center gap-y-2;
 }
 
 .userPanelFrameContainer {
-    @apply h-[10vh] w-[75%];
-}
-
-.userPanelButtonsContainer {
-    @apply flex flex-row gap-x-4;
+    @apply h-[10vh] w-[60%];
 }
 

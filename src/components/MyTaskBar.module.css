@@ -1,0 +1,13 @@
+
+
+.mainContainer {
+    @apply absolute bottom-1 min-w-[350px];
+}
+
+.menuButton {
+    @apply min-w-full;
+}
+
+.listContainer {
+}
+
