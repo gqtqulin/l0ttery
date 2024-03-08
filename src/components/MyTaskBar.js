@@ -16,6 +16,10 @@ const MyTaskBar = ({
         setIsBlueScreenMode(true);
     };
 
+    const handleLoginButton = () => {
+
+    }
+
     const handleLogoutButton = () => {
         // -- drop cookies & account (state) & revoke permissions (metamask)
         setAccountAddress("");
@@ -31,9 +35,10 @@ const MyTaskBar = ({
                 <div className={styles.listContainer}>
                     <List className={styles.list} width="200px">
                         <List.Item
-                            onClick=""
+                            onClick={handleLoginButton}
                             icon={<LoaderBat variant="32x32_4" />}
                             className={styles.listItem}
+                            disabled={true}
                         >
                             login
                         </List.Item>

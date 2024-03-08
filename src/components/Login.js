@@ -1,6 +1,6 @@
 import { Button, TitleBar, ThemeProvider } from "@react95/core";
 import "@react95/icons/icons.css";
-import styles from "./Login.module.css";
+import styles from "./styles/Login.module.css";
 import "../index.css";
 import { getProvider, getAccounts } from "../ethereum/ethereum";
 import Web3 from "web3";

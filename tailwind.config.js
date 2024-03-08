@@ -19,7 +19,11 @@ module.exports = {
         winGray: "#c0c0c0",
         winBlue: "#0F30B7",
         winPurple: "#8E0384",
-        winRed: "#8E0101"
+        winRed: "#8E0101",
+        bgColor: "#6F9CEB",
+        bgColor2: "#E09F7D",
+        bgColor3: "#FF7F51",
+        dark: "#202223",
       }
     },
   },

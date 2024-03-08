@@ -1,0 +1,12 @@
+
+.container {
+    @apply flex flex-col justify-center min-w-[200px] items-center;
+}
+
+.numbers {
+    @apply font-honk text-8xl;
+}
+
+.button {
+    @apply text-xl w-[150px] hover:font-bold;
+}

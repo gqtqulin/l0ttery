@@ -10,10 +10,12 @@ import { useEffect, useState } from "react";
 import { getProvider, getAccounts } from "./ethereum/ethereum";
 import { useCookies } from "react-cookie";
 import MyTaskBar from "./components/MyTaskBar";
+import Alert from "./components/Alert";
 
 function App() {
     const [isBlueScreenMode, setIsBlueScreenMode] = useState(false);
     const [accountAddress, setAccountAddress] = useState("");
+    const [errorAlertMsg, setErrorAlertMsg] = useState("");
     const [cookies, setCookies, removeCookies] = useCookies(["accountAddress"]);
 
     //let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
@@ -46,7 +48,7 @@ function App() {
   };
 
     return (
-        <ThemeProvider theme="molecule">
+        <ThemeProvider theme="tokyoDark">
             {isBlueScreenMode ? (
                 <BlueScreenMode setIsBlueScreenMode={setIsBlueScreenMode} />
             ) : (
@@ -78,7 +80,7 @@ function App() {
                     )}
 
                     <MyTaskBar
-                        
+                        accountAddress={accountAddress}
                         setAccountAddress={setAccountAddress}
                         removeCookies={removeCookies}
                         setIsBlueScreenMode={setIsBlueScreenMode}

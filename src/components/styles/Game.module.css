@@ -15,37 +15,20 @@
 
 */
 
-.gameFrame {
-    @apply min-w-full min-h-full flex flex-row justify-around items-center;
-}
-
 .gameFrameContainer {
-    @apply h-[30vh] w-[75%];
+    @apply h-[30vh] w-[75%] flex flex-row justify-around items-center;
 }
 
 .header {
     @apply font-pressstart2p text-xl;
 }
 
-.numbersContainer {
-    @apply flex min-w-[200px] justify-center gap-y-5 items-center flex-col;
-}
-
-.numbers {
-    @apply text-8xl font-honk;
-}
-
 .amountButton {
     @apply w-[100px] h-[50px];
 }
 
-/* right container */
-.inputContainer {
-    @apply flex flex-col justify-center items-center gap-y-2;
-}
-
 .buttonsAmountContainer {
-    @apply flex justify-center items-center;
+    @apply flex justify-center items-center gap-x-2;
 }
 
 /* left container */
@@ -55,10 +38,6 @@
 
 .rollButton {
     @apply text-xl w-[150px] hover:font-bold;
-}
-
-.input {
-    @apply w-[200px] text-center;
 }
 
 .range {
@@ -85,3 +64,12 @@
     @apply h-[10vh] w-[60%];
 }
 
+
+/* input в левом контейнере */
+.input {
+    @apply w-[200px] text-center;
+}
+
+.rightContainer {
+    @apply flex flex-col justify-center items-center gap-y-2;
+}

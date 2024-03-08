@@ -1,7 +1,7 @@
 
 
 .page {
-  @apply h-[100vh] w-[100%] m-0 p-0 flex justify-center items-center font-pressstart2p bg-winGreen;
+  @apply h-[100vh] w-[100%] m-0 p-0 flex justify-center items-center font-pressstart2p text-dark bg-bgColor;
 }
 
 .blueScreenPage {

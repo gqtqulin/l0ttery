@@ -1,0 +1,5 @@
+
+
+.fieldset {
+    @apply max-w-[210px] min-h-[110px] grid grid-cols-3;
+}

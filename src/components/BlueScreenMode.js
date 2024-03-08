@@ -2,7 +2,7 @@
 import { ProgressBar, Button } from '@react95/core';
 import '@react95/icons/icons.css';
 import '../index.css';
-import styles from './BlueScreenMode.module.css';
+import styles from './styles/BlueScreenMode.module.css';
 
 const WithdrawMode = ({ setIsBlueScreenMode }) => {
 
